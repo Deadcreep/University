@@ -10,5 +10,16 @@ namespace University
     {
         public string Name { get; private set; }
         public List<string> Subject { get; private set; }
+
+        public Teacher(string name)
+        {
+            Name = name;
+            Subject = new List<string>();            
+        }
+
+        public void AddSubject (string subject)
+        {
+            Subject.Add(subject);
+        }
     }
 }

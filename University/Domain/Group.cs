@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace University
 {
@@ -20,6 +21,12 @@ namespace University
         public void InctrementCourse()
         {
             Course++;
+            StringBuilder temp = new StringBuilder(Name);
+            Regex tmp = new Regex(@"\d");
+            Match matchTemp = tmp.Match(Name);
+            var intemp =  Name.IndexOf(Convert.ToChar(matchTemp.Value));            
+            temp[intemp]++;
+            Name = Convert.ToString(temp);           
         }
     }
 }

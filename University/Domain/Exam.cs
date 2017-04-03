@@ -10,7 +10,7 @@ namespace University
     {
        public DateTime time { get; private set; }
 
-        public Exam(DateTime dt, string subject, string day, string aud, Teacher teacher) : base()
+        public Exam(DateTime dt, string subject, string day, string aud, Teacher teacher) : base(subject, day, aud, teacher)
         {
             time = dt;
         }
