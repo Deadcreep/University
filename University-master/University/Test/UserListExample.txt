@@ -1,0 +1,5 @@
+﻿login name password true
+LordOfChaos Andrew 666Hell666 false
+Helen67 Helen 9ijn*UHB true
+log123 Alex 123ert456 true
+GreenDog John qwerty false

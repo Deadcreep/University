@@ -1,0 +1,9 @@
+C:\Users\Ирина\Desktop\Максим\University-master\University\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+C:\Users\Ирина\Desktop\Максим\University-master\University\Test\bin\Debug\UserListExample.txt
+C:\Users\Ирина\Desktop\Максим\University-master\University\Test\bin\Debug\Test.exe.config
+C:\Users\Ирина\Desktop\Максим\University-master\University\Test\bin\Debug\Test.exe
+C:\Users\Ирина\Desktop\Максим\University-master\University\Test\bin\Debug\Test.pdb
+C:\Users\Ирина\Desktop\Максим\University-master\University\Test\bin\Debug\Domain.dll
+C:\Users\Ирина\Desktop\Максим\University-master\University\Test\bin\Debug\Domain.pdb
+C:\Users\Ирина\Desktop\Максим\University-master\University\Test\obj\Debug\Test.exe
+C:\Users\Ирина\Desktop\Максим\University-master\University\Test\obj\Debug\Test.pdb
