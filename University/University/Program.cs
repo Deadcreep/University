@@ -14,11 +14,20 @@ namespace University
         [STAThread]
         static void Main()
         {
-            
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            LoginForm login = new LoginForm();
-            Application.Run(login);
+            UserList userlist = new UserList()
+            {
+                ListOfUser = new Dictionary<string, User>()
+                                                            {
+                                                                { "throll", new User("Andrew", "123", true)},
+                                                                { "LordOfChaos", new User ("Andrew", "666Hell666", false)},
+                                                                { "Helen67", new User ("Helen", "9ijn*UHB", true) },
+                                                                { "log123", new User ("Alex", "123ert456", true) },
+                                                                { "GreenDog", new User ("John", "qwerty", false) }
+                                                            }
+            };
+
+            Application.Run(new LoginForm());
         }
     }
 }
+    

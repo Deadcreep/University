@@ -14,22 +14,26 @@ namespace University
         {
             Button SeeSheduleButton = new Button()
             {
-                Location = new Point(0, 0),
-                Size = new Size(ClientSize.Width, 30),
+                Dock = DockStyle.Fill,
                 Text = "Посмотреть Расписание"                
             };
 
             Button ChangeSheduleButton = new Button()
             {
-                Location = new Point(0, SeeSheduleButton.Bottom),
-                Size = new Size(ClientSize.Width, 30),
+                Dock = DockStyle.Fill,
                 Text = "Изменить Расписание"
             };
 
-            Controls.Add(SeeSheduleButton);
-            Controls.Add(ChangeSheduleButton);
-        }
+            var table = new TableLayoutPanel();
 
-        
+            table.RowStyles.Clear();
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));            
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+
+            table.Controls.Add(SeeSheduleButton);
+            table.Controls.Add(ChangeSheduleButton);
+            Controls.Add(table);
+        }        
     }
 }

@@ -16,6 +16,7 @@ namespace University
         {
             this.address = address;
             this.number = number;
+            Auditories = new List<Auditory>();
         }
 
         public void AddAuditory(Auditory a)

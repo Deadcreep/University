@@ -24,6 +24,10 @@ namespace University
             StringBuilder temp = new StringBuilder(Name);
             Regex tmp = new Regex(@"\d");
             Match matchTemp = tmp.Match(Name);
+            if (Convert.ToInt32(matchTemp.Value) > 4)
+            {
+                throw new ArgumentException("Максимальный курс");
+            }
             var intemp =  Name.IndexOf(Convert.ToChar(matchTemp.Value));            
             temp[intemp]++;
             Name = Convert.ToString(temp);           

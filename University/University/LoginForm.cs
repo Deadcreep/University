@@ -10,47 +10,67 @@ namespace University
 {
     class LoginForm : Form
     {
+        Label loginLabel;
+        TextBox loginBox;
+        Label passLabel;
+        TextBox passBox;
+        Button TryLogin;
+
         public LoginForm()
         {
-            Label loginLabel = new Label()
+            var aut = new Authorization();
+            loginLabel = new Label()
             {
-                Location = new Point(0, 0),
+                Text = "Login ",
+                Dock = DockStyle.Fill
+            };
+
+            loginBox = new TextBox()
+            {   
                 Size = new Size(ClientSize.Width, 30),
-                Text = "Login "
+                Dock = DockStyle.Fill
             };
 
-            TextBox loginBox = new TextBox()
-            {
-                Location = new Point(0, loginLabel.Bottom),
-                Size = new Size(ClientSize.Width, 30)
+            passLabel = new Label()
+            {   
+                Text = "Password ",
+                Dock = DockStyle.Fill
             };
 
-            Label passLabel = new Label()
+            passBox = new TextBox()
             {
-                Location = new Point(0, loginBox.Bottom),
-                Size = new Size(ClientSize.Width, 30),
-                Text = "Password "
-            };
-
-            TextBox passBox = new TextBox()
-            {
-                Location = new Point(0, passLabel.Bottom),
-                Size = new Size(ClientSize.Width, 30)
-            };
-
-            Button TryLogin = new Button()
-            {
-                Location = new Point(0, passBox.Bottom + 10),
-                Size = new Size(70, 30),
-                Text = "Вход"
+                Dock = DockStyle.Fill,                
+                PasswordChar = '*'
                 
-            };          
-            Controls.Add(loginLabel);
-            Controls.Add(loginBox);
-            Controls.Add(passLabel);
-            Controls.Add(passBox);
-            Controls.Add(TryLogin);
+            };
 
+            TryLogin = new Button()
+            {
+                Text = "Вход",                
+                Dock = DockStyle.Top
+            };
+
+            var table = new TableLayoutPanel();
+
+            table.RowStyles.Clear();
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+
+            table.Controls.Add(loginLabel, 0, 0);
+            table.Controls.Add(loginBox, 0, 1);
+            table.Controls.Add(passLabel, 0, 2);
+            table.Controls.Add(passBox, 0, 3);
+            table.Controls.Add(TryLogin, 0, 4);
+            table.Dock = DockStyle.Fill;
+            Controls.Add(table);
+            var tempPass = passBox.Text;
+            var tempLog = loginBox.Text
+            TryLogin.Click += (sender, args) => aut.TryLogin_Click(this, tempLog, tempPass);
         }
+        
     }
 }

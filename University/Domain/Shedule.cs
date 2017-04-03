@@ -9,5 +9,13 @@ namespace University
     public class Shedule
     {
         public List<Lesson> GroupShedule { get; private set; }
+
+        public void AddLesson(Lesson less)
+        {
+            GroupShedule.Add(less);
+        }
     }
+    
+    
+
 }
