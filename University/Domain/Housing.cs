@@ -12,6 +12,7 @@ namespace University
         string address;
         int number;
 
+
         public Housing(string address, int number)
         {
             this.address = address;
@@ -21,6 +22,7 @@ namespace University
 
         public void AddAuditory(Auditory a)
         {
+            List<Auditory> Auditories = new List<Auditory>();
             Auditories.Add(a);
         }
     }

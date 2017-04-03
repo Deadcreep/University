@@ -1,0 +1,14 @@
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\bin\Debug\University.exe.config
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\obj\Debug\University.exe
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\obj\Debug\University.pdb
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\bin\Debug\University.exe
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\bin\Debug\University.pdb
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\bin\Debug\Domain.dll
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\bin\Debug\Domain.pdb
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\obj\Debug\uni.csprojResolveAssemblyReference.cache
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\obj\Debug\University.Properties.Resources.resources
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\obj\Debug\uni.csproj.GenerateResource.Cache
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\obj\Debug\University.LoginForm.resources
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\obj\Debug\University.Login.resources
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\obj\Debug\University.Form1.resources
+C:\Users\Ирина\Desktop\Максим\University-master\University\University\obj\Debug\University.MainMenu.resources
