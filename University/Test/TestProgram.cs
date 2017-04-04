@@ -35,15 +35,25 @@ namespace University
 
             var ivt = new EducationDirection("IVT");
             ivt.AddGroup(new Group("IVT-201"));
+
             var teach1 = new Teacher("Kharn");
 
             var gr1 = new Group("IVT-103");
             var gr2 = new Group("IVT-305");
+            ivt.AddGroup(gr1);
+            ivt.AddGroup(gr2);
 
-            var les1 = new Practice(1, "Matan", "Monday", p132, teach1, gr1);
-
+            var practice1 = new Practice(1, "Matan", "Monday", p132, teach1, gr1);
+            var les1 = new Lection(2, "Matan", "Monday", a15, teach1, gr1);
             var shed1 = new Shedule();
             shed1.AddLesson(les1);
+            shed1.AddLesson(les1);
+            shed1.AddLesson(practice1);
+
+            var temp1 = shed1.GetGroupShedule(gr1);
+            var temp2 = shed1.GetTeacherShedule(teach1);
+            var temp3 = shed1.GetEdDiShedule(ivt);
+            Console.WriteLine(temp3.Count + " " + temp3[0].Subject );
 
             var testList = new UserList() { ListOfUser = Reader.GetUserList("UserListExample.txt") };
             foreach( var temp in testList.ListOfUser)

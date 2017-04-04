@@ -10,13 +10,13 @@ namespace University
     {
         public string Name { get; private set; }
         public string Password { get; private set; }
-        public bool Control { get; private set; } // if true - can change shedule
+        public string Type { get; private set; } // if true - can change shedule
 
-        public User(string name, string password, bool control)
+        public User(string name, string password, string type)
         {
             Name = name;
             Password = password;
-            Control = control;
+            Type = type;
         }
 
         public void ChangePassword(string newPass)
@@ -31,7 +31,7 @@ namespace University
 
         public override string ToString()
         {
-            return Name + " " + Password + " " + Control;
+            return Name + " " + Password + " " + Type;
         }
 
     }

@@ -9,17 +9,17 @@ namespace University
     public class EducationDirection
     {
         public string Name { get; private set; }
-        public List<Group> groups { get; private set; }
+        public List<Group> Groups { get; private set; }
 
         public EducationDirection(string name)
         {
             Name = name;
-            groups = new List<Group>();
+            Groups = new List<Group>();
         }
 
         public void AddGroup(Group group)
         {
-            groups.Add(group);
+            Groups.Add(group);
         }                
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,5 +34,12 @@ namespace University
             }
             return temp;
         }
+
+        public List<Lesson> GetLessonsOfOneTeacher(Teacher teacher)
+        {
+            var temp = new List<Lesson>();
+            return temp;
+        }
+
     }
 }
