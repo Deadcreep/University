@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace University.Properties
+namespace TestForms.Properties
 {
 
 

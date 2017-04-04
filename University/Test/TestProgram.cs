@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,36 +14,39 @@ namespace University
         
         static void Main(string[] args)
         {
-            University univer = new University("CSU");
-            Housing Hous1 = new Housing("Kashirin brothers 129", 1);
-            Hous1.AddAuditory(new Auditory("A-15", "Lecture room"));
-            Hous1.AddAuditory(new Auditory("132", "Practical room"));
+            var univer = new University("CSU");
 
-            Housing Hous2 = new Housing("Molodogvardeytsev, 79", 2);
-            Hous2.AddAuditory(new Auditory("115", "Lecture room"));
-            Hous2.AddAuditory(new Auditory("315", "Practical room"));
+            var hous1 = new Housing("Kashirin brothers 129", 1); 
+            var a15 = new Auditory("A-15", "Lecture room"); 
+            var p132 = new Auditory("132", "Practical room"); 
+            hous1.AddAuditory(a15);
+            hous1.AddAuditory(p132);
 
-            univer.AddHousing(Hous1);
-            univer.AddHousing(Hous2);
-            var teacher1 = new Teacher("Kharn");
-            var teacher2 = new Teacher("Tzeench");
-            Faculty Iit = new Faculty("IIT");
+            var hous2 = new Housing("Molodogvardeytsev, 79", 2);
+            var q115 = new Auditory("115", "Lecture room");
+            var p315 = new Auditory("315", "Practical room");
+            hous2.AddAuditory(q115);
+            hous2.AddAuditory(p315);
 
-            EducationDirection Ivt = new EducationDirection("IVT");
-            Ivt.AddGroup(new Group("IVT-201"));
+            univer.AddHousing(hous1);
+            univer.AddHousing(hous2);
 
-            Group gr1 = new Group("IVT-103");
+            var iit = new Faculty("IIT");
 
-            var Pair1 = new Practice(1, "English", "Monday", "132", teacher1);
-            var Pair2 = new Practice(3, "BD", "Friday", "A-15", teacher2);
+            var ivt = new EducationDirection("IVT");
+            ivt.AddGroup(new Group("IVT-201"));
+            var teach1 = new Teacher("Kharn");
 
-            var Shedule = new Shedule();
-            Shedule.AddLesson(Pair1);
-            Shedule.AddLesson(Pair2);
-            
+            var gr1 = new Group("IVT-103");
+            var gr2 = new Group("IVT-305");
 
-            UserList TestList = new UserList() { ListOfUser = Reader.GetUserList("UserListExample.txt") };
-            foreach( var temp in TestList.ListOfUser)
+            var les1 = new Practice(1, "Matan", "Monday", p132, teach1, gr1);
+
+            var shed1 = new Shedule();
+            shed1.AddLesson(les1);
+
+            var testList = new UserList() { ListOfUser = Reader.GetUserList("UserListExample.txt") };
+            foreach( var temp in testList.ListOfUser)
             {
                 Console.WriteLine(temp.Key + " " +  temp.Value.ToString());                
             }
@@ -52,56 +54,3 @@ namespace University
         }
     }
 }
-=======
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using University;
-
-
-namespace University
-{
-    
-
-    class TestProgram
-    {
-        
-        static void Main(string[] args)
-        {
-            University univer = new University("CSU");
-            Housing Hous1 = new Housing("Kashirin brothers 129", 1);
-            Hous1.AddAuditory(new Auditory("A-15", "Lecture room"));
-            Hous1.AddAuditory(new Auditory("132", "Practical room"));
- 
-            Housing Hous2 = new Housing("Molodogvardeytsev, 79", 2);
-            Hous2.AddAuditory(new Auditory("115", "Lecture room"));
-            Hous2.AddAuditory(new Auditory("315", "Practical room"));
-           
-            univer.AddHousing(Hous1);
-            univer.AddHousing(Hous2);
-
-            
-
-            Faculty Iit = new Faculty("IIT");
-            Console.WriteLine(Iit.Name);
-            EducationDirection Ivt = new EducationDirection("IVT");
-            Ivt.AddGroup(new Group("IVT-201"));
-            
-            Group gr1 = new Group("IVT-103");
-            Console.WriteLine(gr1.Name);
-            gr1.InctrementCourse();
-            Console.WriteLine(gr1.Name);
-
-
-            UserList TestList = new UserList() { ListOfUser = Reader.GetUserList("UserListExample.txt") };
-            foreach( var temp in TestList.ListOfUser)
-            {
-                Console.WriteLine(temp.Key + " " +  temp.Value.ToString());                
-            }
-            Console.ReadLine();
-        }
-    }
-}
->>>>>>> origin/master

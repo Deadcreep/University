@@ -17,7 +17,6 @@ namespace University
             Name = name;
             Password = password;
             Control = control;
-            
         }
 
         public void ChangePassword(string newPass)

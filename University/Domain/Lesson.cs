@@ -10,17 +10,17 @@ namespace University
     {
         public string Subject { get; private set; }
         public string Day { get; private set; }
-        public string Auditory { get; private set; }
+        public Auditory Auditory { get; private set; }
         public Teacher Teacher { get; private set; }
-        public Group Group { get; private set; }
+        public  Group Group { get; private set; }
 
-        public Lesson(string subject, string day, string aud, Teacher teacher, Group group)
+        public Lesson(string subject, string day, Auditory aud, Teacher teacher, Group @group)
         {
             Subject = subject;
             Day = day;
             Auditory = aud;
             Teacher = teacher;
-            Group = group;
+            Group = @group;
         }
     }
 }
