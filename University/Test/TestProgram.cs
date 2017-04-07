@@ -37,29 +37,36 @@ namespace University
             ivt.AddGroup(new Group("IVT-201"));
 
             var teach1 = new Teacher("Kharn");
-
+            univer.AddFaculty(iit);
             var gr1 = new Group("IVT-103");
             var gr2 = new Group("IVT-305");
+            gr2.InctrementCourse();
+            gr2.InctrementCourse();
             ivt.AddGroup(gr1);
             ivt.AddGroup(gr2);
-
-            var practice1 = new Practice(1, "Matan", "Monday", p132, teach1, gr1);
-            var les1 = new Lection(2, "Matan", "Monday", a15, teach1, gr1);
-            var shed1 = new Shedule();
+            iit.AddEducationDirection(ivt);
+            var practice1 = new Lesson("Matan", "Monday", p132, teach1, gr1, 1);
+            var les1 = new Lesson("English", "Monday", a15, teach1, gr1, 2);
+            var shed1 = new Schedule();
             shed1.AddLesson(les1);
             shed1.AddLesson(les1);
             shed1.AddLesson(practice1);
 
-            var temp1 = shed1.GetGroupShedule(gr1);
-            var temp2 = shed1.GetTeacherShedule(teach1);
-            var temp3 = shed1.GetEdDiShedule(ivt);
-            Console.WriteLine(temp3.Count + " " + temp3[0].Subject );
+            var temp5 = iit.GetGroupsOfCourse(1);
+            var temp6 = iit.GetFacultyGroups();
 
-            var testList = new UserList() { ListOfUser = Reader.GetUserList("UserListExample.txt") };
-            foreach( var temp in testList.ListOfUser)
-            {
-                Console.WriteLine(temp.Key + " " +  temp.Value.ToString());                
-            }
+            Console.WriteLine(temp6.Count + " " + temp6.First().Name + " " + temp6.Last().Name);
+
+            var temp1 = shed1.GetGroupSchedule(gr1);
+            var temp2 = shed1.GetTeacherSchedule(teach1);
+            var temp3 = shed1.GetEdDiSchedule(ivt);
+            var temp4 = iit.GetMaxCourse();
+            Console.WriteLine(temp4);
+            var testList = new UserList();
+            testList.AddUser("Max", "Maxim", "qwerty", true);
+            testList.AddUser("Dajan", "Dajan", "qwerty", true);
+            testList.AddUser("Petro", "Petro", "qwerty", true);
+            testList.AddUser("Sanya", "Sanya", "qwerty", true);
             
         }
     }

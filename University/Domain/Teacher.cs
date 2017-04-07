@@ -21,5 +21,10 @@ namespace University
         {
             Subject.Add(subject);
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

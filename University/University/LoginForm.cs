@@ -10,6 +10,9 @@ namespace University
 {
     class LoginForm : Form
     {
+
+        public delegate void ChecksLogin(string login);
+
         public LoginForm()
         {
             Label loginLabel = new Label()
@@ -39,9 +42,10 @@ namespace University
             {
                 Dock = DockStyle.Top,
                 Text = "Вход"
-            };          
+            };
 
             var table = new TableLayoutPanel();
+
             table.RowStyles.Clear();
             table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
             table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
@@ -57,6 +61,30 @@ namespace University
             table.Controls.Add(passBox);
             table.Controls.Add(TryLogin);
             Controls.Add(table);
+
+            TryLogin.Click += (sender, args) => Autorisation(loginBox.Text, passBox.Text);
+            if (Application.OpenForms.Count == 0) Application.Exit();
+        }
+
+        private void Autorisation(string login, string password)
+        {
+            var tryFlag = true;
+            while (tryFlag)
+            {
+                try
+                {
+                    var temp = UserList.CheckLogin(login, password);
+                    ScheduleForm scheduleForm = new ScheduleForm(temp.IsAdmin);
+                    scheduleForm.Show();
+                    this.Hide();
+                    tryFlag = false;
+                }
+                catch (Exception e)
+                {
+                    MessageForm.Message(e.Message);
+                    break;
+                }
+            }
         }
     }
 }

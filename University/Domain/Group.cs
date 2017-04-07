@@ -28,5 +28,10 @@ namespace University
             temp[intemp]++;
             Name = Convert.ToString(temp);           
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

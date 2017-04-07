@@ -13,14 +13,21 @@ namespace University
         public Auditory Auditory { get; private set; }
         public Teacher Teacher { get; private set; }
         public  Group Group { get; private set; }
+        public int PairNumber { get; private set; }
 
-        public Lesson(string subject, string day, Auditory aud, Teacher teacher, Group @group)
+        public Lesson(string subject, string day, Auditory aud, Teacher teacher, Group @group, int pairnum)
         {
             Subject = subject;
             Day = day;
             Auditory = aud;
             Teacher = teacher;
             Group = @group;
+            PairNumber = pairnum;
+        }
+
+        public override string ToString()
+        {   
+            return Subject + " Aud. " + Auditory.Number + " " + Teacher.Name;
         }
     }
 }

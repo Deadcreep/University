@@ -14,11 +14,19 @@ namespace University
         [STAThread]
         static void Main()
         {
-            
+            var testList = new UserList();
+            testList.AddUser("Max", "Maxim", "qwerty", true);
+            testList.AddUser("Dajan", "Dajan", "qwerty", true);
+            testList.AddUser("Petro", "Petro", "qwerty", true);
+            testList.AddUser("Sanya", "Sanya", "qwerty", false);
+            var uni = UniversityCreator.CreateUniversity();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             LoginForm login = new LoginForm();
-            Application.Run(login);
+            ChangeLessonForm tst = new ChangeLessonForm(uni.UniversitySchedule.ScheduleList.First(), "IBM-43", 1);
+           // ScheduleForm sheduleForm = new ScheduleForm();
+            Application.Run(tst);
         }
     }
 }

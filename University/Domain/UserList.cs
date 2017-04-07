@@ -8,7 +8,8 @@ namespace University
 {
     public class UserList
     {
-        public Dictionary<string, User> ListOfUser;
+
+        public static Dictionary<string, User> ListOfUser = new Dictionary<string, User>();
 
         public void AddUser(string login, string name, string pass, bool control)
         {
@@ -20,6 +21,16 @@ namespace University
             ListOfUser.Remove(login);
         }
 
+        public static User CheckLogin(string login, string password)
+        {
+            if ((login != null) & (password != null) & (ListOfUser.ContainsKey(login)) &
+                (ListOfUser[login].Password == password))
+            {
+                return ListOfUser[login];
+            }
+            else throw new ArgumentException("Wrong login or password");
+        }
 
     }
 }
+

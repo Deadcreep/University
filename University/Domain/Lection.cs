@@ -10,7 +10,7 @@ namespace University
     {
         public int PairNumber { get; private set; }
 
-        public Lection(int number, string subject, string day, Auditory aud, Teacher teacher, Group gr) : base(subject, day, aud, teacher, gr)
+        public Lection( string subject, string day, Auditory aud, Teacher teacher, Group gr, int number) : base(subject, day, aud, teacher, gr, number)
         {
             PairNumber = number;
         }

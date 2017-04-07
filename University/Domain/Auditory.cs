@@ -11,10 +11,14 @@ namespace University
         public string Number { get; private set; }
         public string Type { get; private set; }
 
-        public Auditory(string number, string type)
+        public Auditory(string number)
         {
             Number = number;
-            Type = type;
+        }
+
+        public override string ToString()
+        {
+            return Number;
         }
     }
 }

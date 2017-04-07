@@ -21,7 +21,7 @@ namespace University
                     var userInfo = usersInfo[i].Split();
                     userList.Add(userInfo[0], new User(userInfo[1],
                                                        userInfo[2], 
-                                                       Convert.ToBoolean(userInfo[3])));
+                                                       userInfo[3]));
                 }
                 catch (ArgumentException ae)
                 {

@@ -41,16 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auditory.cs" />
+    <Compile Include="UniversityCreator.cs" />
     <Compile Include="EducationDirection.cs" />
     <Compile Include="Exam.cs" />
     <Compile Include="Faculty.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Housing.cs" />
-    <Compile Include="Lection.cs" />
     <Compile Include="Lesson.cs" />
-    <Compile Include="Practice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shedule.cs" />
+    <Compile Include="Schedule.cs" />
     <Compile Include="Teacher.cs" />
     <Compile Include="University.cs" />
     <Compile Include="User.cs" />

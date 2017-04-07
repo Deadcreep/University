@@ -8,11 +8,11 @@ namespace University
 {
     public class Practice : Lesson
     {
-        public int PairNumber { get; private set; }
+       // public int PairNumber { get; private set; }
 
-        public Practice(int num, string subject, string day, Auditory aud, Teacher teacher, Group gr) : base(subject, day, aud, teacher, gr)
+        public Practice(string subject, string day, Auditory aud, Teacher teacher, Group gr, int num) : base( subject,  day,  aud,  teacher,  gr,  num)
         {
-            PairNumber = num;
+            
         }
     }
 }

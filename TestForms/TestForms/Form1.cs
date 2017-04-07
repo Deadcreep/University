@@ -29,10 +29,28 @@ namespace TestForms
             dataGridView1.Rows.Add();
             dataGridView1.Rows.Add();
             dataGridView1.Rows.Add();
-            dataGridView1.AllowUserToAddRows = false;
+            
 
             dataGridView1["Monday", 1] = new DataGridViewTextBoxCell() {Value = new Tst { Key = 101, Value = "Hunred and one" } };
             dataGridView1["Tuesday", 0] = new DataGridViewTextBoxCell() {Value = "t0"};
+
+            this.Load += MainForm_Load;
+            
+        }
+
+        private void DataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if(e.ColumnIndex > 0) return;
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                row.HeaderCell.Value = $"{row.Index + 1}";
+            }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            dataGridView1.CellFormatting += DataGridView1_CellFormatting;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
