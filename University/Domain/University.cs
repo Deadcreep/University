@@ -6,18 +6,26 @@ using System.Threading.Tasks;
 
 namespace University
 {
-    
+    [Serializable]
     public class University
     {
-        public string Name { get; private set; }
-        public List<Faculty> Faculties { get; private set; }
-        public List<Housing> Housings { get; private set; }
-        public Schedule UniversitySchedule { get; private set; }
-        public List<Teacher> Teachers { get; private set; }
+        public string Name { get;  set; }
+        public List<Faculty> Faculties { get;  set; }
+        public List<Housing> Housings { get;  set; }
+        public Schedule UniversitySchedule { get;  set; }
+        public List<Teacher> Teachers { get;  set; }
 
-        public University(string name)
+        //public University(string name)
+        //{
+        //    Name = name;
+        //    Faculties = new List<Faculty>();
+        //    Housings = new List<Housing>();
+        //    UniversitySchedule = new Schedule();
+        //    Teachers = new List<Teacher>();
+        //}
+
+        public University()
         {
-            Name = name;
             Faculties = new List<Faculty>();
             Housings = new List<Housing>();
             UniversitySchedule = new Schedule();

@@ -25,7 +25,7 @@ namespace University
         public ScheduleForm(bool isA)
         {
             this.isAdmin = isA;
-            university = UniversityCreator.CreateUniversity();
+            university = UniversitySerializator.DeserializeUniversity();
             facultyComboBox = new ComboBox
             {
                 Size = new Size(130, 50),
@@ -71,20 +71,56 @@ namespace University
                 Dock = DockStyle.Fill,
             };
 
-            groupShedule.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Monday", HeaderText = "Monday", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill});
-            groupShedule.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Tuesday", HeaderText = "Tuesday",  AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
-            groupShedule.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Wednesday", HeaderText = "Wednesday", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
-            groupShedule.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Thursday", HeaderText = "Thursday", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
-            groupShedule.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Friday", HeaderText = "Friday",  AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
-            groupShedule.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Saturday", HeaderText = "Saturday", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
-            groupShedule.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            groupShedule.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "Monday",
+                HeaderText = "Monday",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                SortMode = DataGridViewColumnSortMode.NotSortable
+            });
+            groupShedule.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "Tuesday",
+                HeaderText = "Tuesday",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                SortMode = DataGridViewColumnSortMode.NotSortable
+            });
+            groupShedule.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "Wednesday",
+                HeaderText = "Wednesday",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                SortMode = DataGridViewColumnSortMode.NotSortable
+            });
+            groupShedule.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "Thursday",
+                HeaderText = "Thursday",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                SortMode = DataGridViewColumnSortMode.NotSortable
+            });
+            groupShedule.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "Friday",
+                HeaderText = "Friday",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                SortMode = DataGridViewColumnSortMode.NotSortable
+            });
+            groupShedule.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "Saturday",
+                HeaderText = "Saturday",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                SortMode = DataGridViewColumnSortMode.NotSortable
+            });
+           // groupShedule.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             groupShedule.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             groupShedule.AllowUserToResizeColumns = false;
             groupShedule.AllowUserToResizeRows = false;
-
+            groupShedule.ReadOnly = true;
             for (int i = 0; i < 7; i++)
             {
-                groupShedule.Rows.Add(new DataGridViewRow(){MinimumHeight = 20});
+                groupShedule.Rows.Add(new DataGridViewRow(){Height = 50, });
             }
             
             groupShedule.TopLeftHeaderCell.Value = "№";
@@ -118,13 +154,45 @@ namespace University
             this.Load += ScheduleForm_Load;
         }
 
-        private void GroupShedule_DoubleClick( object sender, DataGridViewCellEventArgs e)
+        private void GroupShedule_DoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (!isAdmin) return;
-            var value = groupShedule[e.ColumnIndex, e.RowIndex].Value as Lesson;
-            var groupName = GroupsComboBox.SelectedText;
-            ChangeLessonForm changeLessonForm = new ChangeLessonForm(value, groupName , e.RowIndex+1);
-            changeLessonForm.Show();
+            var newLesson = new Lesson()
+            {
+                PairNumber = e.RowIndex + 1,
+                Day = groupShedule.Columns[e.ColumnIndex].Name,
+                Group = GroupsComboBox.SelectedItem as Group,
+            };
+            var m = Mode.create;
+            if (groupShedule[e.ColumnIndex, e.RowIndex].Value != null)
+            {
+                newLesson = groupShedule[e.ColumnIndex, e.RowIndex].Value as Lesson;
+                m = Mode.edit;
+            }
+            ChangeLessonForm changeLessonForm = new ChangeLessonForm(newLesson);
+            if (changeLessonForm.ShowDialog() == DialogResult.OK)
+            {
+                if (m == Mode.create)
+                {
+                    try
+                    {
+                        university.UniversitySchedule.AddLesson(newLesson);
+                        groupShedule[e.ColumnIndex, e.RowIndex].Value = newLesson;
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                        throw;
+                    }
+                    
+                }
+            }
+            UniversitySerializator.SerializeUniversity(university);
+            university = UniversitySerializator.DeserializeUniversity();
+            var fac = university.Faculties.Find(faculty => faculty.Name == facultyComboBox.SelectedItem.ToString());
+            var group = fac.GetFacultyGroups().Find(gr => gr.Name == GroupsComboBox.SelectedItem.ToString());
+            var shedule = university.UniversitySchedule.GetGroupSchedule(group);
+            FillShedule(shedule);
         }
 
         private void ScheduleForm_Load(object sender, EventArgs e)
@@ -137,12 +205,10 @@ namespace University
             }
         }
 
-        private void GroupsComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        private void FacultyComboBoxOnSelectionChangeCommitted(object sender, EventArgs eventArgs)
         {
-            var fac = university.Faculties.Find(faculty => faculty.Name == facultyComboBox.SelectedItem.ToString());
-            var group = fac.GetFacultyGroups().Find(gr => gr.Name == GroupsComboBox.SelectedItem.ToString());
-            var shedule = university.UniversitySchedule.GetGroupSchedule(group);
-            FillShedule(shedule);
+            var temp = university.Faculties[facultyComboBox.SelectedIndex];
+            CourseComboBox.DataSource = temp.GetExistingCourses();
         }
 
         private void CourseComboBox_SelectionChangeCommitted(object sender, EventArgs e)
@@ -150,14 +216,17 @@ namespace University
             var fac = university.Faculties.Find(faculty => faculty.Name == facultyComboBox.SelectedItem.ToString());
             var facGr = fac.GetFacultyGroups();
             var temp = facGr.Where(group => group.Course == Convert.ToInt32(CourseComboBox.SelectedItem)).ToList();
-            GroupsComboBox.DataSource = temp.Select(name => name.Name).ToList();
+            GroupsComboBox.DataSource = temp;
         }
 
-        private void FacultyComboBoxOnSelectionChangeCommitted(object sender, EventArgs eventArgs)
+        private void GroupsComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            var temp = university.Faculties[facultyComboBox.SelectedIndex];
-            CourseComboBox.DataSource = temp.GetExistingCourses();
+            var fac = university.Faculties.Find(faculty => faculty.Name == facultyComboBox.SelectedItem.ToString());
+            var group = fac.GetFacultyGroups().Find(gr => gr.Name == GroupsComboBox.SelectedItem.ToString());
+            var shedule = university.UniversitySchedule.GetGroupSchedule(group);
+            FillShedule(shedule);
         }
+        
 
         private void FillShedule(List<Lesson> lessons)
         {
@@ -166,7 +235,7 @@ namespace University
             foreach (var lesson in lessons)
             {
                 var day = lesson.Day;
-                var number = lesson.PairNumber;
+                var number = lesson.PairNumber - 1;
                 groupShedule[day, number].Value =  lesson;
             }
         }
@@ -181,5 +250,11 @@ namespace University
                 }
             }
         }
+    }
+
+    enum Mode
+    {
+        create,
+        edit
     }
 }

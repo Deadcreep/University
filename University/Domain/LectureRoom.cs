@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace University
 {
-    public class Auditory
+    [Serializable]
+    public class LectureRoom
     {
-        public string Number { get; private set; }
-        public string Type { get; private set; }
+        public string Number { get;  set; }
+        public string Type { get;  set; }
 
-        public Auditory(string number)
-        {
-            Number = number;
+        public LectureRoom()
+        {   
         }
 
         public override string ToString()

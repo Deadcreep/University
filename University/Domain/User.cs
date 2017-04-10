@@ -6,32 +6,27 @@ using System.Threading.Tasks;
 
 namespace University
 {
+    [Serializable]
     public class User
     {
-        public string Name { get; private set; }
-        public string Password { get; private set; }
-        public bool IsAdmin { get; private set; } 
+        public string Name { get;  set; }
+        public string Login { get;  set; }
+        public string PasswordHash { get;  set; }
+        public bool IsAdmin { get;  set; } 
+        
+        //public void ChangePassword(string newPass)
+        //{
+        //    if(HashPassword == newPass)
+        //    {
+        //        throw new ArgumentException("Новый пароль совпадает со старым");
+        //    }
 
-        public User(string name, string password, bool isAdmin)
-        {
-            Name = name;
-            Password = password;
-            this.IsAdmin = isAdmin;
-        }
-
-        public void ChangePassword(string newPass)
-        {
-            if(Password == newPass)
-            {
-                throw new ArgumentException("Новый пароль совпадает со старым");
-            }
-
-            Password = newPass;
-        }
+        //    HashPassword = newPass;
+        //}
 
         public override string ToString()
         {
-            return Name + " " + Password + " " + IsAdmin;
+            return Login + " " + Name + " " + PasswordHash + " " + IsAdmin;
         }
 
     }

@@ -73,7 +73,7 @@ namespace University
             {
                 try
                 {
-                    var temp = UserList.CheckLogin(login, password);
+                    var temp = Membership.CheckLogin(login, password);
                     ScheduleForm scheduleForm = new ScheduleForm(temp.IsAdmin);
                     scheduleForm.Show();
                     this.Hide();

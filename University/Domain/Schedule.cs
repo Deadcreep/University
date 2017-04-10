@@ -7,23 +7,50 @@ using System.Threading.Tasks;
 
 namespace University
 {
+    [Serializable]
+
     public class Schedule
     {
-        public List<Lesson> ScheduleList { get; private set; }
+        public List<Lesson> ScheduleList { get;  set; }
 
         public Schedule()
         {
             ScheduleList = new List<Lesson>();
         }
 
-        public void AddLesson(Lesson lessons)
+        public void AddLesson(Lesson newLesson)
         {
-            ScheduleList.Add(lessons);
+            if (ScheduleList.Any(lesson => lesson.PairNumber == newLesson.PairNumber &&
+                                           lesson.Day == newLesson.Day &&
+                                           lesson.Group == newLesson.Group &&
+                                           lesson.Subject != newLesson.Subject))
+    {
+                throw new ArgumentException("This group has an lesson at this time");
+            }
+
+            if (ScheduleList.Any(lesson => lesson.PairNumber == newLesson.PairNumber &&
+                                           lesson.Day == newLesson.Day &&
+                                           lesson.LectureRoom == newLesson.LectureRoom &&
+                                           lesson.Group != newLesson.Group &&
+                                           lesson.Subject != newLesson.Subject))
+            {
+                throw new ArgumentException("The lecture room is busy");
+            }
+
+            if (ScheduleList.Any(lesson => lesson.Day == newLesson.Day &&
+                                           lesson.PairNumber == newLesson.PairNumber &&
+                                           lesson.LectureRoom != newLesson.LectureRoom &&
+                                           lesson.Teacher == newLesson.Teacher))
+            {
+                throw new ArgumentException("The teacher is busy");
+            }
+
+            ScheduleList.Add(newLesson);
         }
 
         public List<Lesson> GetGroupSchedule(Group ggroup)
         {
-            var temp = ScheduleList.Where(x => x.Group == ggroup).ToList();
+            var temp = ScheduleList.Where(x => x.Group.Name == ggroup.Name).ToList();
             return temp;
         }
 
@@ -50,5 +77,6 @@ namespace University
             var temp = ScheduleList.Where(x => x.Day == day).ToList();
             return temp;
         }
+        
     }
 };

@@ -6,22 +6,21 @@ using System.Threading.Tasks;
 
 namespace University
 {
+    [Serializable]
     public class Housing
     {
-        public List<Auditory> Auditories { get; private set; }
-        string address;
-        int number;
+        public List<LectureRoom> LectureRooms { get;  set; }
+        public string address;
+        public int number;
 
-        public Housing(string address, int number)
+        public Housing()
         {
-            this.address = address;
-            this.number = number;
-            Auditories = new List<Auditory>();
+            LectureRooms = new List<LectureRoom>();
         }
 
-        public void AddAuditory(Auditory a)
+        public void AddAuditory(LectureRoom a)
         {
-            Auditories.Add(a);
+            LectureRooms.Add(a);
         }
     }
 

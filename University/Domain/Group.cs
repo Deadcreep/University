@@ -7,14 +7,14 @@ using System.Text.RegularExpressions;
 
 namespace University
 {
+    [Serializable]
     public class Group
     {
-        public string Name { get; private set; }       
-        public int Course { get; private set; }
+        public string Name { get;  set; }       
+        public int Course { get;  set; }
 
-        public Group(string name)
-        {
-            Name = name;
+        public Group()
+        {  
             Course = 1;
         }
 

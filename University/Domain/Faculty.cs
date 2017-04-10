@@ -8,17 +8,16 @@ using System.Threading.Tasks;
 
 namespace University
 {
+    [Serializable]
     public class Faculty
     {
-        public string Name { get; private set; }
-        public List<EducationDirection> EducationDirection { get; private set; }
+        public string Name { get;  set; }
+        public List<EducationDirection> EducationDirection { get;  set; }
        
 
-        public Faculty(string name)
+        public Faculty()
         {
-            Name = name;
             EducationDirection = new List<EducationDirection>();
-            
         }
 
         public void AddEducationDirection(EducationDirection eddir)

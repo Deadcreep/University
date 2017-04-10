@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace University
 {
+    [Serializable]
     public class Teacher
     {
-        public string Name { get; private set; }
-        public List<string> Subject { get; private set; }
+        public string Name { get;  set; }
+        public List<string> Subjects { get;  set; }
 
-        public Teacher(string name)
+        public Teacher()
         {
-            Name = name;
-            Subject = new List<string>();            
+            Subjects = new List<string>();            
         }
 
         public void AddSubject (string subject)
         {
-            Subject.Add(subject);
+            Subjects.Add(subject);
         }
 
         public override string ToString()

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace University
 {
+    [Serializable]
     public class EducationDirection
     {
-        public string Name { get; private set; }
-        public List<Group> Groups { get; private set; }
+        public string Name { get;  set; }
+        public List<Group> Groups { get;  set; }
 
-        public EducationDirection(string name)
+        public EducationDirection()
         {
-            Name = name;
             Groups = new List<Group>();
         }
 

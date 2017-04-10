@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,20 +14,19 @@ namespace University
         /// </summary>
         [STAThread]
         static void Main()
-        {
-            var testList = new UserList();
-            testList.AddUser("Max", "Maxim", "qwerty", true);
-            testList.AddUser("Dajan", "Dajan", "qwerty", true);
-            testList.AddUser("Petro", "Petro", "qwerty", true);
-            testList.AddUser("Sanya", "Sanya", "qwerty", false);
-            var uni = UniversityCreator.CreateUniversity();
-
+        {  
+            //var testList = new Membership();
+            //testList.AddUser("Max", "Maxim", "qwerty", true);
+            //testList.AddUser("Dajan", "Dajan", "qwerty", true);
+            //testList.AddUser("Petro", "Petro", "qwerty", true);
+            //testList.AddUser("Sanya", "Sanya", "qwerty", false);
+        //    var uni = UniversityCreator.CreateUniversity();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             LoginForm login = new LoginForm();
-            ChangeLessonForm tst = new ChangeLessonForm(uni.UniversitySchedule.ScheduleList.First(), "IBM-43", 1);
-           // ScheduleForm sheduleForm = new ScheduleForm();
-            Application.Run(tst);
+            //ChangeLessonForm tst = new ChangeLessonForm(test.UniversitySchedule.ScheduleList.First());
+             ScheduleForm sheduleForm = new ScheduleForm(true);
+            Application.Run(login);
         }
     }
 }

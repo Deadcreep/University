@@ -29,13 +29,19 @@ namespace TestForms
             dataGridView1.Rows.Add();
             dataGridView1.Rows.Add();
             dataGridView1.Rows.Add();
+           
             
-
             dataGridView1["Monday", 1] = new DataGridViewTextBoxCell() {Value = new Tst { Key = 101, Value = "Hunred and one" } };
             dataGridView1["Tuesday", 0] = new DataGridViewTextBoxCell() {Value = "t0"};
-
+            dataGridView1.CellDoubleClick += DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.Load += MainForm_Load;
             
+        }
+
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
         private void DataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -63,16 +69,6 @@ namespace TestForms
             var tst = comboBox1.SelectedItem as Tst;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var cell = dataGridView1[e.ColumnIndex, e.RowIndex];
-            var temp = cell.Value as Tst;
-        }
     }
 
 
