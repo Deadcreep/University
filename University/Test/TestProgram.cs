@@ -21,19 +21,18 @@ namespace University
                 //testList.AddUser("Dajan", "Dajan", "qwerty", true);
                 //testList.AddUser("Petro", "Petro", "qwerty", true);
                 //testList.AddUser("Sanya", "Sanya", "qwerty", false);
+                var membership = Membership.MyMembership;
 
-                var testList = new List<User>()
-                {
-                    new User() {Login = "Max",Name = "Maxim", PasswordHash = Membership.GetPasswordHash("qwerty"), IsAdmin = true},
-                    new User() {Login = "Dajan",Name = "Dajan",PasswordHash = Membership.GetPasswordHash("qwerty"),IsAdmin = true},
-                    new User() {Login = "Petro",Name = "Petro",PasswordHash = Membership.GetPasswordHash("qwerty"),IsAdmin = false},
-                };
+                membership.AddUser("Max", "Maxim", "qwerty", true);
+                membership.AddUser("Dajan", "Dajan", "qwerty", true);
+                membership.AddUser("Petro", "Petro", "qwerty", true);
+                membership.AddUser("Sanya", "Sanya", "qwerty", false);
+                var testList = 
 
-                Membership.SerializeMembership(testList);
-                var temp = Membership.DeserializeMembership();
-                var membership = new Membership();
+                MembershipSerializator.SerializeMembership(membership);
+                var temp = MembershipSerializator.DeserializeMembership();
                 membership.AddUser("q", "w", "as12", true);
-                Membership.SerializeMembership(temp);
+                MembershipSerializator.SerializeMembership(temp);
             }
             catch (Exception e)
             {

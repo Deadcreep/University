@@ -9,12 +9,11 @@ using System.Xml.Serialization;
 
 namespace University
 {
-    
+    [Serializable]
     public class Membership
     {
-        [XmlArrayItem("MemberList"), XmlArrayItem("Item")]
-        public static List<User> MemberList = DeserializeMembership();
-
+        private static Membership myMembership;
+        public List<User> UserList;
         public static string GetPasswordHash(string value)
         {
             Encoding encoding = Encoding.ASCII;
@@ -31,42 +30,35 @@ namespace University
             return encoding.GetString(bytes);
         }
 
-        public static List<User> DeserializeMembership()
+        private Membership()
         {
-            var formatter = new XmlSerializer(typeof(List<User>));
-            FileStream fsdm = new FileStream("Membership.xml", FileMode.OpenOrCreate);
-            XmlReader reader = XmlReader.Create(fsdm);
-            var membership = (List<User>)formatter.Deserialize(reader);
-            fsdm.Close();
-            return membership;
+            UserList = new List<User>()
+            {
+                new User() {Login = "Max",Name = "Maxim", PasswordHash = Membership.GetPasswordHash("qwerty"), IsAdmin = true},
+                new User() {Login = "Dajan",Name = "Dajan",PasswordHash = Membership.GetPasswordHash("qwerty"),IsAdmin = true},
+                new User() {Login = "Petro",Name = "Petro",PasswordHash = Membership.GetPasswordHash("qwerty"),IsAdmin = false},
+            };
         }
 
-        public static void SerializeMembership(List<User> m)
-        {
-            File.Delete("Membership.xml");
-            var formatter = new XmlSerializer(typeof(List<User>));
-            FileStream fsm = new FileStream("Membership.xml", FileMode.OpenOrCreate);
-            formatter.Serialize(fsm, m);
-            fsm.Close();
-        }
-        
+        public static Membership MyMembership => myMembership ?? (myMembership = new Membership());
+
         public void AddUser(string login, string name, string pass, bool control)
         {
-            MemberList.Add( new User() {Login = login,Name = name, PasswordHash = GetPasswordHash(pass), IsAdmin = control });
-            SerializeMembership(MemberList);
+            myMembership.UserList.Add( new User() {Login = login,Name = name, PasswordHash = GetPasswordHash(pass), IsAdmin = control });
+            MembershipSerializator.SerializeMembership(this);
         }
 
         public void RemoveUser(string login)
         {
-            MemberList.Remove(MemberList.Find(user => user.Login == login));
+            UserList.Remove(UserList.Find(user => user.Login == login));
         }
 
         public static User CheckLogin(string login, string password)
         {
-            if ((login != null) & (password != null) & (MemberList.Any(user => user.Login == login)) &
-                (MemberList.Any(user => user.Login == login && user.PasswordHash == GetPasswordHash(password))))
+            if ((login != null) & (password != null) & (MyMembership.UserList.Any(user => user.Login == login)) &
+                (MyMembership.UserList.Any(user => user.Login == login && user.PasswordHash == GetPasswordHash(password))))
             {
-                return MemberList.Find(user => user.Login == login);
+                return MyMembership.UserList.Find(user => user.Login == login);
             }
             else throw new ArgumentException("Wrong login or password");
         }

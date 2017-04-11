@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LectureRoom.cs" />
+    <Compile Include="MembershipSerializator.cs" />
     <Compile Include="UniversitySerializator.cs" />
     <Compile Include="EducationDirection.cs" />
     <Compile Include="Exam.cs" />

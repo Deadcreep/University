@@ -23,7 +23,6 @@ namespace University
 
         //    HashPassword = newPass;
         //}
-
         public override string ToString()
         {
             return Login + " " + Name + " " + PasswordHash + " " + IsAdmin;

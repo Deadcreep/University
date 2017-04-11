@@ -14,7 +14,9 @@ namespace University
         /// </summary>
         [STAThread]
         static void Main()
-        {  
+        {
+            var temp = Membership.MyMembership;
+            temp.AddUser("q", "n", "qw12", true);
             //var testList = new Membership();
             //testList.AddUser("Max", "Maxim", "qwerty", true);
             //testList.AddUser("Dajan", "Dajan", "qwerty", true);
