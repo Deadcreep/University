@@ -10,8 +10,7 @@ namespace University
     public class LectureRoom
     {
         public string Number { get;  set; }
-        public string Type { get;  set; }
-
+       
         public LectureRoom()
         {   
         }
@@ -19,6 +18,14 @@ namespace University
         public override string ToString()
         {
             return Number;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var temp = obj as LectureRoom;
+            if (temp == null) return false;
+            if (temp == this) return true;
+            return this.Number == temp.Number;
         }
     }
 }

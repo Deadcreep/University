@@ -22,17 +22,17 @@ namespace University
                 //testList.AddUser("Petro", "Petro", "qwerty", true);
                 //testList.AddUser("Sanya", "Sanya", "qwerty", false);
                 var membership = Membership.MyMembership;
-
                 membership.AddUser("Max", "Maxim", "qwerty", true);
                 membership.AddUser("Dajan", "Dajan", "qwerty", true);
                 membership.AddUser("Petro", "Petro", "qwerty", true);
                 membership.AddUser("Sanya", "Sanya", "qwerty", false);
-                var testList = 
-
                 MembershipSerializator.SerializeMembership(membership);
                 var temp = MembershipSerializator.DeserializeMembership();
                 membership.AddUser("q", "w", "as12", true);
                 MembershipSerializator.SerializeMembership(temp);
+
+                ScheduleSerializator.SerializeSchedule(new Schedule());
+
             }
             catch (Exception e)
             {

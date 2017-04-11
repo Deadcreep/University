@@ -9,26 +9,19 @@ namespace University
     [Serializable]
     public class University
     {
+        private static University university;
         public string Name { get;  set; }
         public List<Faculty> Faculties { get;  set; }
         public List<Housing> Housings { get;  set; }
-        public Schedule UniversitySchedule { get;  set; }
         public List<Teacher> Teachers { get;  set; }
 
-        //public University(string name)
-        //{
-        //    Name = name;
-        //    Faculties = new List<Faculty>();
-        //    Housings = new List<Housing>();
-        //    UniversitySchedule = new Schedule();
-        //    Teachers = new List<Teacher>();
-        //}
+        public static University UniversityInstance => university ??
+                                                       (university = UniversitySerializator.DeserializeUniversity());
 
-        public University()
+        private University()
         {
             Faculties = new List<Faculty>();
             Housings = new List<Housing>();
-            UniversitySchedule = new Schedule();
             Teachers = new List<Teacher>();
         }
 
@@ -45,11 +38,6 @@ namespace University
         public void AddHousing (Housing housing)
         {
             Housings.Add(housing);
-        }
-
-        public void AddSchedule(Schedule schedule)
-        {
-            UniversitySchedule = schedule;
         }
 
         public string[] GetFacultyNameslList()

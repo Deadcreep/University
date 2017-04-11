@@ -33,5 +33,13 @@ namespace University
         {
             return Name;
         }
+
+        public override bool Equals(object obj)
+        {
+            var temp = obj as Group;
+            if (temp == null) return false;
+            if (temp == this) return true;
+            return this.Name == temp.Name;
+        }
     }
 }

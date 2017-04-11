@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="LectureRoom.cs" />
     <Compile Include="MembershipSerializator.cs" />
+    <Compile Include="ScheduleSerializator.cs" />
     <Compile Include="UniversitySerializator.cs" />
     <Compile Include="EducationDirection.cs" />
     <Compile Include="Exam.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="University.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Membership.cs" />
+    <Compile Include="ValidationResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

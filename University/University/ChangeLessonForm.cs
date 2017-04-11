@@ -25,12 +25,14 @@ namespace University
         private ComboBox numberComboBox;
         private ComboBox groupComboBox;
         private Label infoLabel;
+        private Schedule schedule;
         
 
         public ChangeLessonForm(Lesson lesson)
         {
             this.lesson = lesson;
-            var university = UniversitySerializator.DeserializeUniversity();
+            var university = University.UniversityInstance;
+            schedule = Schedule.ScheduleInstance;
 
             infoLabel = new Label()
             {
@@ -84,7 +86,7 @@ namespace University
                 Anchor = AnchorStyles.Top & AnchorStyles.Left,
                 Size = new Size(70, 30),
                 Text = "Cancel",
-                Dock = DockStyle.Fill,
+                Dock = DockStyle.Top,
             };
 
             AcceptButton = createLesson;
@@ -92,14 +94,11 @@ namespace University
 
             TableLayoutPanel table = new TableLayoutPanel();
             table.Dock = DockStyle.Fill;
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
-
+            for (int i = 0; i < 7; i++)
+            {
+                table.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
+            }
+            
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150));
             table.Controls.Add(infoLabel, 0, 0);
             table.Controls.Add(subjectComboBox, 0, 1);
@@ -112,7 +111,6 @@ namespace University
             cancelButton.Click += CancelButton_Click;
 
             createLesson.Click += CreateLesson_Click;
-            
         }
 
         private void CreateLesson_Click(object sender, EventArgs e)
@@ -120,8 +118,16 @@ namespace University
             lesson.LectureRoom = LectureRoomComboBox.SelectedItem as LectureRoom;
             lesson.Teacher = teacherComboBox.SelectedItem as Teacher;
             lesson.Subject = subjectComboBox.SelectedItem as string;
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            var res = schedule.ValidateLesson(lesson);
+            if (res.Success)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show(res.ErrorMessage);
+            }
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

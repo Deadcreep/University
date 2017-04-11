@@ -11,41 +11,67 @@ namespace University
 
     public class Schedule
     {
+        public event EventHandler<LessonEventArgs> LessonAdded;
+
+        private void OnLessonAdded(LessonEventArgs e)
+        {
+            var handler = this.LessonAdded;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        private static Schedule schedule = null;
+
         public List<Lesson> ScheduleList { get;  set; }
 
-        public Schedule()
+        public static Schedule ScheduleInstance => schedule ?? (schedule = ScheduleSerializator.DeserializeSchedule());
+
+        private Schedule()
         {
-            ScheduleList = new List<Lesson>();
         }
 
         public void AddLesson(Lesson newLesson)
         {
+            var validationResult = ValidateLesson(newLesson);
+            if (validationResult.Success == false)
+            {
+                throw new InvalidOperationException(validationResult.ErrorMessage);
+            }
+
+            ScheduleList.Add(newLesson);
+            OnLessonAdded(new LessonEventArgs(newLesson));
+        }
+        
+        public ValidationResult ValidateLesson(Lesson newLesson)
+        {
             if (ScheduleList.Any(lesson => lesson.PairNumber == newLesson.PairNumber &&
                                            lesson.Day == newLesson.Day &&
-                                           lesson.Group == newLesson.Group &&
+                                           lesson.Group.Equals(newLesson.Group) &&
                                            lesson.Subject != newLesson.Subject))
-    {
-                throw new ArgumentException("This group has an lesson at this time");
+            {
+                return new ValidationResult() { ErrorMessage = "This group has an lesson at this time", Success = false};
             }
 
             if (ScheduleList.Any(lesson => lesson.PairNumber == newLesson.PairNumber &&
                                            lesson.Day == newLesson.Day &&
-                                           lesson.LectureRoom == newLesson.LectureRoom &&
-                                           lesson.Group != newLesson.Group &&
+                                           lesson.LectureRoom.Equals(newLesson.LectureRoom) &&
+                                           !lesson.Group.Equals(newLesson.Group) &&
                                            lesson.Subject != newLesson.Subject))
             {
-                throw new ArgumentException("The lecture room is busy");
+                return new ValidationResult() {ErrorMessage = "The lecture room is busy", Success = false};
             }
 
             if (ScheduleList.Any(lesson => lesson.Day == newLesson.Day &&
                                            lesson.PairNumber == newLesson.PairNumber &&
-                                           lesson.LectureRoom != newLesson.LectureRoom &&
-                                           lesson.Teacher == newLesson.Teacher))
+                                           !lesson.LectureRoom.Equals(newLesson.LectureRoom) &&
+                                           lesson.Teacher.Equals(newLesson.Teacher)))
             {
-                throw new ArgumentException("The teacher is busy");
+                return new ValidationResult() { ErrorMessage = "The teacher is busy", Success = false};
             }
 
-            ScheduleList.Add(newLesson);
+            return new ValidationResult() {Success = true};
         }
 
         public List<Lesson> GetGroupSchedule(Group ggroup)
@@ -72,11 +98,20 @@ namespace University
             var temp = ScheduleList.Where(x => groups.Contains(x.Group)).ToList();
             return temp;
         }
+
         public List<Lesson> GetLessonInOneDay(string day)
         {
             var temp = ScheduleList.Where(x => x.Day == day).ToList();
             return temp;
         }
-        
+    }
+
+    public class LessonEventArgs : EventArgs
+    {
+        public LessonEventArgs(Lesson lesson)
+        {
+            Lesson = lesson;
+        }
+        public Lesson Lesson { get; set; }
     }
 };

@@ -10,21 +10,18 @@ namespace University
     public class Teacher
     {
         public string Name { get;  set; }
-        public List<string> Subjects { get;  set; }
-
-        public Teacher()
-        {
-            Subjects = new List<string>();            
-        }
-
-        public void AddSubject (string subject)
-        {
-            Subjects.Add(subject);
-        }
-
+        
         public override string ToString()
         {
             return Name;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var temp = obj as Teacher;
+            if (temp == null) return false;
+            if (temp == this) return true;
+            return this.Name == temp.Name;
         }
     }
 }
