@@ -10,7 +10,7 @@ namespace University
     public class Lesson
     {
         public string Subject { get;  set; }
-        public string Day { get;  set; }
+        public DayOfWeek Day { get;  set; }
         public LectureRoom LectureRoom { get;  set; }
         public Teacher Teacher { get;  set; }
         public  Group Group { get;  set; }

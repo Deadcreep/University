@@ -99,7 +99,7 @@ namespace University
             return temp;
         }
 
-        public List<Lesson> GetLessonInOneDay(string day)
+        public List<Lesson> GetLessonInOneDay(DayOfWeek day)
         {
             var temp = ScheduleList.Where(x => x.Day == day).ToList();
             return temp;

@@ -6,6 +6,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Runtime.Remoting.Channels;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -116,16 +117,19 @@ namespace University
 
         private void Schedule_LessonAdded(object sender, LessonEventArgs e)
         {
-            groupShedule[e.Lesson.Day, e.Lesson.PairNumber].Value = e.Lesson;
+            groupShedule[e.Lesson.Day.ToString(), e.Lesson.PairNumber].Value = e.Lesson;
         }
 
         private void GroupShedule_DoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (!isAdmin) return;
+            var temp = Enum.GetValues(typeof(DayOfWeek)).OfType<DayOfWeek>().ToList();
+            var day =  temp.Find(week => week.ToString() == groupShedule.Columns[e.ColumnIndex].Name);
             var newLesson = new Lesson()
             {
+                
                 PairNumber = e.RowIndex + 1,
-                Day = groupShedule.Columns[e.ColumnIndex].Name,
+                Day = day,
                 Group = GroupsComboBox.SelectedItem as Group,
             };
             var m = Mode.create;
@@ -189,7 +193,7 @@ namespace University
             AlarmLabel.Visible = lessons.Count == 0;
             foreach (var lesson in lessons)
             {
-                var day = lesson.Day;
+                var day = lesson.Day.ToString();
                 var number = lesson.PairNumber - 1;
                 groupShedule[day, number].Value = lesson;
             }
@@ -223,4 +227,5 @@ namespace University
         create,
         edit
     }
+
 }

@@ -17,22 +17,16 @@ namespace University
         {
             try
             {
-                var temp = Membership.MyMembership;
-                temp.AddUser("q", "n", "qw12", true);
-                //var testList = new Membership();
-                //testList.AddUser("Max", "Maxim", "qwerty", true);
-                //testList.AddUser("Dajan", "Dajan", "qwerty", true);
-                //testList.AddUser("Petro", "Petro", "qwerty", true);
-                //testList.AddUser("Sanya", "Sanya", "qwerty", false);
-                //    var uni = UniversityCreator.CreateUniversity();
+                ScheduleSerializator.DeserializeSchedule();
+                UniversitySerializator.DeserializeUniversity();
+                MembershipSerializator.DeserializeMembership();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 LoginForm login = new LoginForm();
-                //ChangeLessonForm tst = new ChangeLessonForm(test.UniversitySchedule.ScheduleList.First());
-                ScheduleForm sheduleForm = new ScheduleForm(true);
-                Application.Run(sheduleForm);
+                
+                Application.Run(login);
             }
-            catch (InvalidOperationException e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }

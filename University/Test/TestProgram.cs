@@ -30,8 +30,7 @@ namespace University
                 var temp = MembershipSerializator.DeserializeMembership();
                 membership.AddUser("q", "w", "as12", true);
                 MembershipSerializator.SerializeMembership(temp);
-
-                ScheduleSerializator.SerializeSchedule(new Schedule());
+                ScheduleSerializator.SerializeSchedule(Schedule.ScheduleInstance);
 
             }
             catch (Exception e)
